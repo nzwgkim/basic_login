@@ -28,10 +28,16 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Login'),
-      ),
-      body: const Center(child: Text('Body')),
-    );
+        appBar: AppBar(
+          title: const Text('Login'),
+        ),
+        body: Center(
+            child: TextFormField(
+                decoration: const InputDecoration(
+          fillColor: Colors.yellow,
+          filled: true,
+          border:
+              OutlineInputBorder(borderSide: BorderSide(color: Colors.green)),
+        ))));
   }
 }
