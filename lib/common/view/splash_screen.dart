@@ -31,18 +31,18 @@ class _SplashScreenState extends State<SplashScreen> {
     final accessToken = await storage.read(key: ACCESS_TOKEN_KEY);
 
     if (refreshToken == null || accessToken == null) {
-      Navigator.of(context).pushAndRemoveUntil(
+      Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (_) => const LoginScreen(),
         ),
-        (route) => false,
+        // (route) => false,
       );
     } else {
-      Navigator.of(context).pushAndRemoveUntil(
+      Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (_) => const RootTab(),
         ),
-        (route) => false,
+        // (route) => false,
       );
     }
   }
