@@ -1,43 +1,23 @@
+import 'package:basic_login/user/view/login_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    const _App(),
+  );
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class _App extends StatelessWidget {
+  const _App({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
       theme: ThemeData(
-        useMaterial3: true,
-        primarySwatch: Colors.blue,
+        fontFamily: 'NotoSans',
       ),
-      home: const Home(),
+      debugShowCheckedModeBanner: false,
+      home: const LoginScreen(),
     );
-  }
-}
-
-class Home extends StatelessWidget {
-  const Home({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text('Login'),
-        ),
-        body: Center(
-            child: TextFormField(
-                decoration: const InputDecoration(
-          fillColor: Colors.yellow,
-          filled: true,
-          border:
-              OutlineInputBorder(borderSide: BorderSide(color: Colors.green)),
-        ))));
   }
 }
