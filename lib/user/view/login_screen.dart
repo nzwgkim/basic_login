@@ -1,14 +1,23 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:basic_login/common/view/root_tab.dart';
 import 'package:basic_login/common/component/custom_text_form_field.dart';
 import 'package:basic_login/common/const/colors.dart';
 import 'package:basic_login/common/layout/default_layout.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  String username = '';
+  String password = '';
 
   @override
   Widget build(BuildContext context) {
@@ -40,19 +49,23 @@ class LoginScreen extends StatelessWidget {
                 ),
                 CustomTextFormField(
                   hintText: '이메일을 입력해주세요.',
-                  onChanged: (String value) {},
+                  onChanged: (String value) {
+                    username = value;
+                  },
                 ),
                 const SizedBox(height: 16.0),
                 CustomTextFormField(
                   hintText: '비밀번호를 입력해주세요.',
-                  onChanged: (String value) {},
+                  onChanged: (String value) {
+                    password = value;
+                  },
                   obscureText: true,
                 ),
                 const SizedBox(height: 16.0),
                 ElevatedButton(
                   onPressed: () async {
                     // ID:비밀번호
-                    const rawString = 'test@codefactory.ai:testtest';
+                    final rawString = '$username:$password';
 
                     Codec<String, String> stringToBase64 = utf8.fuse(base64);
 
@@ -67,6 +80,11 @@ class LoginScreen extends StatelessWidget {
                       ),
                     );
 
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => const RootTab(),
+                      ),
+                    );
                     print(resp.data);
                   },
                   style: ElevatedButton.styleFrom(
@@ -79,7 +97,7 @@ class LoginScreen extends StatelessWidget {
                 TextButton(
                   onPressed: () async {
                     const refreshToken =
-                        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RAY29kZWZhY3RvcnkuYWkiLCJzdWIiOiJmNTViMzJkMi00ZDY4LTRjMWUtYTNjYS1kYTlkN2QwZDkyZTUiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTY3NzQ3OTU2NCwiZXhwIjoxNjc3NTY1OTY0fQ.5VtCpnyFWQmj5P7w5Gg5sl0fj_6VyH_jjsddj9hYfRs';
+                        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RAY29kZWZhY3RvcnkuYWkiLCJzdWIiOiJmNTViMzJkMi00ZDY4LTRjMWUtYTNjYS1kYTlkN2QwZDkyZTUiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTY1Nzg1MTA3MiwiZXhwIjoxNjU3OTM3NDcyfQ.E0z7pf-nGdH5nEhGiew0SOBzM1ja69Fb1zVQ-8C4sFE';
 
                     final resp = await dio.post(
                       'http://$ip/auth/token',
