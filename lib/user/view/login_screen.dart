@@ -1,4 +1,4 @@
-import 'package:basic_login/common/colors.dart';
+import 'package:basic_login/common/const/colors.dart';
 import 'package:basic_login/common/component/custom_text_form_field.dart';
 import 'package:basic_login/common/layout/default_layout.dart';
 import 'package:flutter/material.dart';
