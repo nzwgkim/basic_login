@@ -1,4 +1,4 @@
-import 'package:basic_login/user/view/login_screen.dart';
+import 'package:basic_login/common/view/splash_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -17,7 +17,7 @@ class _App extends StatelessWidget {
         fontFamily: 'NotoSans',
       ),
       debugShowCheckedModeBanner: false,
-      home: const LoginScreen(),
+      home: const SplashScreen(),
     );
   }
 }
