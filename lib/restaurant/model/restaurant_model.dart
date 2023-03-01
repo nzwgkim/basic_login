@@ -1,3 +1,7 @@
+import 'package:actual/common/const/data.dart';
+
+import '../../common/const/data.dart';
+
 enum RestaurantPriceRange {
   expensive,
   medium,
@@ -5,15 +9,15 @@ enum RestaurantPriceRange {
 }
 
 class RestaurantModel {
-  String id;
-  String name;
-  String thumbUrl;
-  List<String> tags;
-  String priceRange;
-  double ratings;
-  int ratingsCount;
-  int deliveryTime;
-  int deliveryFee;
+  final String id;
+  final String name;
+  final String thumbUrl;
+  final List<String> tags;
+  final RestaurantPriceRange priceRange;
+  final double ratings;
+  final int ratingsCount;
+  final int deliveryTime;
+  final int deliveryFee;
 
   RestaurantModel({
     required this.id,
@@ -26,16 +30,22 @@ class RestaurantModel {
     required this.deliveryTime,
     required this.deliveryFee,
   });
-  factory RestaurantModel.fromJson(Map<String, dynamic> json) {
+
+  factory RestaurantModel.fromJson({
+    required Map<String, dynamic> json,
+  }) {
     return RestaurantModel(
-        id: json['id'],
-        name: json['name'],
-        thumbUrl: json['thumbUrl'],
-        tags: List<String>.from(json['tags']),
-        priceRange: json['priceRange'],
-        ratings: json['ratings'],
-        ratingsCount: json['ratingCount'] ?? 0,
-        deliveryTime: json['deliveryTime'] ?? 0,
-        deliveryFee: json['deliveryFee'] ?? 0);
+      id: json['id'],
+      name: json['name'],
+      thumbUrl: 'http://$ip${json['thumbUrl']}',
+      tags: List<String>.from(json['tags']),
+      priceRange: RestaurantPriceRange.values.firstWhere(
+        (e) => e.name == json['priceRange'],
+      ),
+      ratings: json['ratings'],
+      ratingsCount: json['ratingsCount'],
+      deliveryTime: json['deliveryTime'],
+      deliveryFee: json['deliveryFee'],
+    );
   }
 }
