@@ -1,5 +1,3 @@
-import 'package:actual/common/const/data.dart';
-
 import '../../common/const/data.dart';
 
 enum RestaurantPriceRange {
