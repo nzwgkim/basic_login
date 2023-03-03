@@ -1,3 +1,7 @@
+# Woody
+*.g.dart
+*.lock
+
 # Miscellaneous
 *.class
 *.log
