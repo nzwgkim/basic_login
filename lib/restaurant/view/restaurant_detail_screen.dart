@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../common/const/data.dart';
-import '../../common/dio/dio.dart';
 import '../../common/layout/default_layout.dart';
 import '../../product/component/product_card.dart';
 import '../component/restaurant_card.dart';
@@ -17,21 +15,18 @@ class RestaurantDetailScreen extends ConsumerWidget {
     Key? key,
   }) : super(key: key);
 
-  Future<RestaurantDetailModel> getRestaurantDetail(WidgetRef ref) async {
-    final dio = ref.watch(dioProvider);
-
-    final repository =
-        RestaurantRepository(dio, baseUrl: 'http://$ip/restaurant');
-
-    return repository.getRestaurantDetail(id: id);
-  }
+  /// 1 line이므로, FutureBuilder에 바로 적용하기 위해, 없앴다.
+  // Future<RestaurantDetailModel> getRestaurantDetail(WidgetRef ref) async {
+  //   return ref.watch(restarantRepositoryProvider).getRestaurantDetail(id: id);
+  // }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return DefaultLayout(
       title: '불타는 떡볶이',
       child: FutureBuilder<RestaurantDetailModel>(
-        future: getRestaurantDetail(ref),
+        future:
+            ref.watch(restarantRepositoryProvider).getRestaurantDetail(id: id),
         builder: (_, AsyncSnapshot<RestaurantDetailModel> snapshot) {
           if (snapshot.hasError) {
             return Center(
