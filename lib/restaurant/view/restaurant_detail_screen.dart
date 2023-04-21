@@ -15,18 +15,14 @@ class RestaurantDetailScreen extends ConsumerWidget {
     Key? key,
   }) : super(key: key);
 
-  /// 1 line이므로, FutureBuilder에 바로 적용하기 위해, 없앴다.
-  // Future<RestaurantDetailModel> getRestaurantDetail(WidgetRef ref) async {
-  //   return ref.watch(restarantRepositoryProvider).getRestaurantDetail(id: id);
-  // }
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return DefaultLayout(
       title: '불타는 떡볶이',
       child: FutureBuilder<RestaurantDetailModel>(
-        future:
-            ref.watch(restarantRepositoryProvider).getRestaurantDetail(id: id),
+        future: ref.watch(restaurantRepositoryProvider).getRestaurantDetail(
+              id: id,
+            ),
         builder: (_, AsyncSnapshot<RestaurantDetailModel> snapshot) {
           if (snapshot.hasError) {
             return Center(

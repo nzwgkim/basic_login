@@ -10,13 +10,16 @@ import '../model/restaurant_model.dart';
 
 part 'restaurant_repository.g.dart';
 
-final restarantRepositoryProvider = Provider<RestaurantRepository>((ref) {
-  final dio = ref.watch(dioProvider);
-  final repository =
-      RestaurantRepository(dio, baseUrl: 'http://$ip/restaurant');
+final restaurantRepositoryProvider = Provider<RestaurantRepository>(
+  (ref) {
+    final dio = ref.watch(dioProvider);
 
-  return repository;
-});
+    final repository =
+        RestaurantRepository(dio, baseUrl: 'http://$ip/restaurant');
+
+    return repository;
+  },
+);
 
 @RestApi()
 abstract class RestaurantRepository {
